@@ -1,0 +1,24 @@
+{
+  "name": "Isithelo Monitoring",
+  "description": "",
+  "sitename" : "Isithelo Moniotring",
+  "website" : "https://isithelo-monitoring.herokuapp.com/",
+  "repo" : "https://github.com/Isithelo/entanglement",
+  "scripts": {
+  },
+  "env": {
+    "MONGODB_URI": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

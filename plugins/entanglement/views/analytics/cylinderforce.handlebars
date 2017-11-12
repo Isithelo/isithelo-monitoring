@@ -1,0 +1,186 @@
+ 
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto;text-align:center">
+        <i class="fa fa-spinner fa-spin fa-3x"></i>
+    </div>
+    <h3>Graph Description</h3>
+    <p>This graph shows the maximum and minimum force the cylinder see's per day.</p>
+    <p>The maximum and minimum force lines show are the static design limits of the cylinders. These limits should not be exceeded by the cylinders.</p>
+
+</div>
+</div>
+<div id="selectedMarker"></div>
+<script type="text/javascript">
+    console.log( 'Template Loading : plugins/entanglement/views/analytics/cylinderforce' )
+    console.log( '----------------------------------------------------------------------')
+    var data =[];
+    var seriesChart = []
+    var colours = [
+    'rgba(67,224,177,0.5)',
+    'rgba(3,85,159,0.5)',
+    'rgba(88,206,228,0.5)',
+    'rgba(234,38,42,0.5)'
+    ]
+
+
+///////////////////////////// 
+//////  INITIALISE    //////
+/////////////////////////// 
+$('document').ready(function(){
+ getdata()
+})
+
+
+//////////////////////////////////////// 
+//////  FORMAT FOR HIGHCHARTS    //////
+//////////////////////////////////////
+function getdata(){
+    var cylinderMax=[]
+    var cylinderMin=[]
+    var cylinderMax1=[]
+    var cylinderMin1=[]    
+    var catagories=[]
+    for (var i = 0; i < calendarData.length; i++) {
+        //console.log(calendarData[i]['entry']["coloums"])
+        cylinderMin.push(calendarData[i]['entry']["coloums"]["E641_SR01_WT01-STA_Analog"]["Min"])
+        cylinderMax.push(calendarData[i]['entry']["coloums"]["E641_SR01_WT01-STA_Analog"]["Max"])
+        cylinderMin1.push(calendarData[i]['entry']["coloums"]["E641_SR01_WT02-STA_Analog"]["Min"])
+        cylinderMax1.push(calendarData[i]['entry']["coloums"]["E641_SR01_WT02-STA_Analog"]["Max"])        
+        catagories.push(calendarData[i]["date"])
+    };
+
+    seriesChart.push(
+    {
+       data: cylinderMin,
+       color: colours[0],
+       name : "E641_SR01_WT01-STA_Analog Min",
+       marker: {
+        fillColor: 'white',
+        lineWidth: 2,
+        lineColor: colours[0]
+    },
+},
+{
+   data: cylinderMax,
+   color: colours[1],
+   name : "E641_SR01_WT01-STA_Analog Max",
+   marker: {
+    fillColor: 'white',
+    lineWidth: 2,
+    lineColor: colours[1]
+},
+},
+{
+    data: cylinderMin1,
+    color: colours[2],
+    name : "E641_SR01_WT02-STA_Analog Min",
+    marker: {
+        fillColor: 'white',
+        lineWidth: 2,
+        lineColor: colours[2]
+    },
+},
+{
+    data: cylinderMax1,
+    color: colours[4],
+    name : "E641_SR01_WT02-STA_Analog Max",
+    marker: {
+        fillColor: 'white',
+        lineWidth: 2,
+        lineColor: colours[4]
+    },
+}
+)
+    
+    
+
+    //console.log(calendarData)
+    highchartsAgain(seriesChart,catagories)
+}
+
+
+
+
+
+function highchartsAgain(seriesChart,catagories) {
+ jQuery('#container').highcharts({
+    title: {
+        text: 'Cylinder Maximum and Minimums ',
+            x: -20 //center
+        },
+        xAxis: {
+            categories: catagories
+        },
+        chart: {
+            zoomType: 'x'
+        },
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function () {
+                            html=""
+                            html+='<div class="panel panel-default"><div class="panel-body">'
+                            html+='<button type="button" class="btn btn-default">View</button>    '
+                            html+='Date: ' + this.category + ', value: ' + this.y
+                            html+='</div></div>'
+                            jQuery("#selectedMarker").html(html)
+
+                        }
+                    }
+                }
+            }
+        },
+        credits:false,
+        yAxis: {
+            title: {
+                text: 'Cylinder Force ( kN )'
+            },
+            min: -3000, 
+            max: 2500,
+            plotLines: [{
+                value: 1350,
+                width: 2,
+                color: '#ea262a',
+                dashStyle: 'shortdash',
+                label: {
+                    text: 'Maximum Force'
+                }
+            },{
+                value: -0,
+                width: 2,
+                color: 'green',
+                dashStyle: 'shortdash',
+                label: {
+                    text: 'Zero'
+                }
+            },
+            {
+                value: -1750,
+                width: 2,
+                color: '#ea262a',
+                dashStyle: 'shortdash',
+                label: {
+                    text: 'Minimum Force'
+                }
+            }]
+        },
+        tooltip: {
+            valueSuffix: 'kN'
+        },
+        legend: {
+            //layout: 'vertical',
+            //align: 'bottom',
+            //verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: seriesChart,
+
+    });
+}
+
+</script>
