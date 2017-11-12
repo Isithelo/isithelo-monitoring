@@ -1,9 +1,9 @@
 {
   "name": "Isithelo Monitoring",
   "description": "",
-  "sitename" : "Isithelo Moniotring",
+  "sitename" : "Isithelo monitoring",
   "website" : "https://isithelo-monitoring.herokuapp.com/",
-  "repo" : "https://github.com/Isithelo/entanglement",
+  "repo" : "https://github.com/Isithelo/isithelo-monitoring",
   "scripts": {
   },
   "env": {

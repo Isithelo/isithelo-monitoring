@@ -34,7 +34,7 @@ exports.brief = function(req, res) {
     if(err){console.log('Error Here'); return;}
       var ids = results[10]._id
       var Formids = results[3]._id
-      res.render('../../../plugins/entanglement/views/brief', {
+      res.render('../../../plugins/monitoring/views/brief', {
       pagetitle: 'Brief | '+sitename ,
       items : JSON.stringify(ids),
       Formids : JSON.stringify(Formids)
@@ -50,9 +50,9 @@ exports.monitoring = function(req, res) {
   var query1 = formsModel.find().limit(12)
   query1.exec(function (err, results) {
     if(err){console.log('Error Here'); return;}
-      var ids = '59fd5eca077e477b30dd0967'
+      var ids = '5a0843299571e9b8c50253c4'
       var Formids = results[3]._id
-      res.render('../../../plugins/entanglement/views/monitoring', {
+      res.render('../../../plugins/monitoring/views/monitoring', {
       pagetitle: 'Monitoring | '+sitename ,
       items : JSON.stringify(ids),
       Formids : JSON.stringify(Formids)
@@ -62,7 +62,6 @@ exports.monitoring = function(req, res) {
 }; 
 
  
-
 //////////////////////////////////////////
 ///////////   READ  GROUPS  /////////////
 ////////////////////////////////////////

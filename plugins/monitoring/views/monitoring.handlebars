@@ -36,17 +36,17 @@
 ////////    BUTTON CLICK ADD NEW DB ITEM  /////////
 //////////////////////////////////////////////////
 function addIssue(form,grouping){
-  loadformModalEntanglement(form,'','component',grouping,'','')
+  loadformModalmonitoring(form,'','component',grouping,'','')
 }
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 //////////////////////////////////                                                                                                              
-function loadformModalEntanglement(formdata,idItem,raw,parentid,headings,entry){
-  console.log( 'Button click : plugins/Entanglement/views/monitoring' )
+function loadformModalmonitoring(formdata,idItem,raw,parentid,headings,entry){
+  console.log( 'Button click : plugins/monitoring/views/monitoring' )
   var headings = JSON.stringify(headings)
   var entry = JSON.stringify(entry)
   jQuery.ajax({
-    'url': '/entanglement/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
+    'url': '/monitoring/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -108,7 +108,7 @@ function loadformModalEntanglement(formdata,idItem,raw,parentid,headings,entry){
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'Template Loading : plugins/Entanglement/views/monitoring' )
+console.log( 'Template Loading : plugins/monitoring/views/monitoring' )
 console.log( '-------------------------' )
 console.log( 'databaseid : ',databaseid )
 console.log( 'Formids : ',Formids )
@@ -116,14 +116,14 @@ console.log( 'navmenuHeadings : ',navmenuHeadings )
 console.log( 'databaseMenu : ',databaseMenu )
 console.log( 'temp : ',temp )
 console.log( '-------------------------' )
-console.log( 'Template Loading : plugins/Entanglement/views/monitoring' )
+console.log( 'Template Loading : plugins/monitoring/views/monitoring' )
 
 /////////////////////////////////// 
 //////  GET JSTREE BY ID    //////
 ///////////////////////////////// 
 function jstreeGet(ids){
   jQuery.ajax({
-    'url': '/entanglement/jstree?ids='+ids,
+    'url': '/monitoring/jstree?ids='+ids,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -223,7 +223,7 @@ function getScada(){
   jQuery.ajax({
    'async': true,
    'global': false,
-   'url': '/entanglement/getscada',
+   'url': '/monitoring/getscada',
    'success': function (dataSchemaObject) {
      var scadadata = JSON.parse(dataSchemaObject)
      for (var i = 0; i < scadadata.length; i++) {
@@ -388,7 +388,7 @@ jQuery('#'+locations)
         templateloading(ids)
       }
     })
-    console.log( 'Template Loading : plugins/Entanglement/views/monitoring' )
+    console.log( 'Template Loading : plugins/monitoring/views/monitoring' )
     console.log('---------------------------')
     console.log(' databaseid :', databaseid )
     console.log(' Formids :', Formids )
@@ -396,7 +396,7 @@ jQuery('#'+locations)
     console.log(' databaseMenu :', databaseMenu )
     console.log(' temp :', temp )
     console.log('---------------------------')
-    console.log( 'Template Loading : plugins/Entanglement/views/monitoring' )
+    console.log( 'Template Loading : plugins/monitoring/views/monitoring' )
   }
 
 ///////////////////////////////////////////////////////
@@ -408,7 +408,7 @@ if(ids){
   jQuery.ajax({
    'async': true,
    'global': false,
-   'url': '/entanglement/templateload?ids='+ids,
+   'url': '/monitoring/templateload?ids='+ids,
    'success': function (dataSchemaObject) {
      jQuery('#panel').html("")
      jQuery('#panel').html(dataSchemaObject)

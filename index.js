@@ -210,12 +210,12 @@ app.set('views', path.join(__dirname, 'plugins/heavylifting/views/'));
 var heavyliftingRouting = require('./plugins/heavylifting/routes/routes');
 app.use('/', heavyliftingRouting);
 
-//ENTANGLEMENT
+//monitoring
  //Set Handlebars view directory for plugins
-app.set('views', path.join(__dirname, 'plugins/entanglement/views/'));
+app.set('views', path.join(__dirname, 'plugins/monitoring/views/'));
 //Fratenate Routing
-var entanglementRouting = require('./plugins/entanglement/routes/routes');
-app.use('/', entanglementRouting);
+var monitoringRouting = require('./plugins/monitoring/routes/routes');
+app.use('/', monitoringRouting);
 
 /////////////////////////////
 ////       500          //// 

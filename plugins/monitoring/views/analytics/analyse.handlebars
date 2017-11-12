@@ -1,11 +1,11 @@
-<!--                                                                                                             -->
+y<!--                                                                                                             -->
 <!--             Revision History                                                                                -->
 <!--                1. 20160411 : Added the averaging function                                                   -->
 <!--                2. 20160614 : Added to the shiftbulk monitoring page.                                        -->
 <!--                3. 20160615 : Modified average recording function JSON of datafile.                          -->
 <!--                3. 20160615 : all sample files are required to be in the theme directory for memory reasons. -->
 <!--                4. 20160615 : minor modifcation to instructions area about save directory.                   -->
-<!--                5. 20171105 : Added the analyse csv processor to the Entanglement framework.                 -->
+<!--                5. 20171105 : Added the analyse csv processor to the monitoring framework.                 -->
 <h1>CSV processing and uploader</h1>
 <p>CSV files are streamed into memory, processed against preset parameters and summarized as a JSON file. This JSON is uploaded into the MongodB server for analysis.</p>
 
@@ -128,7 +128,7 @@
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'Template Loading : plugins/entanglement/views/analytics/analyse' )
+console.log( 'Template Loading : plugins/monitoring/views/analytics/analyse' )
 console.log( '----------------------------------------------------------------')
 var eventData=([])
 var temp=[];
@@ -162,7 +162,7 @@ function getScada(){
   jQuery.ajax({
    'async': true,
    'global': false,
-   'url': '/entanglement/getscada',
+   'url': '/monitoring/getscada',
    'success': function (dataSchemaObject) {
      var scadadata = JSON.parse(dataSchemaObject)
      for (var i = 0; i < scadadata.length; i++) {
@@ -712,7 +712,7 @@ dataStats = [{"Tag":"DateTime","greaterThan":0,"lessThan":0,"betweenlower":0,"be
 function demodata(primer){
 
 jQuery.ajax({
-  'url': '/entanglement/createscada',
+  'url': '/monitoring/createscada',
   'type': 'POST', 
   'dataType': 'json',
   'contentType': 'application/json', 

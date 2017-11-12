@@ -1,11 +1,11 @@
-
+ 
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId;
 var wrasse;
  
 
-var entanglement = mongoose.Schema({
+var monitoring = mongoose.Schema({
 'name' :{ type: String, default: 'Inital Form' },
 'detail' :String,
 'objectType' :String,				//child type will be a form id , used for determining what component is created by the form.
@@ -25,10 +25,10 @@ var entanglement = mongoose.Schema({
 'revision' :{ type: String, default: 'created' },
 'created' : { type: Date, default: Date.now },
 'active' : { type: String, default: "true" },
-}, { collection: 'entanglement' });
+}, { collection: 'monitoring' });
 
 
-module.exports = entanglement = mongoose.model('entanglement', entanglement);
+module.exports = monitoring = mongoose.model('monitoring', monitoring);
 
  
 

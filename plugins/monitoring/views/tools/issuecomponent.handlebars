@@ -37,7 +37,7 @@
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'Template Name : plugins/entanglement/views/issuecomponent' )
+console.log( 'Template Name : plugins/monitoring/views/issuecomponent' )
 console.log( '-------------------------' )
 console.log( 'items : ',items )
 console.log( 'query1 : ',query1 )
@@ -47,7 +47,7 @@ console.log( 'query4 : ',query4 )
 console.log( 'tablelistdata : ',tablelistdata )
 console.log( 'formids : ',formids )
 console.log( '-------------------------' )
-console.log( 'Template Name : plugins/entanglement/views/issuecomponent' )
+console.log( 'Template Name : plugins/monitoring/views/issuecomponent' )
 
 var modifiedTableListData
 var modifiedListData
@@ -548,7 +548,7 @@ function permdelete(id){
 ///////////////////////////
 function deleteEntrys(_id){
   jQuery.ajax({
-    'url': '/entanglement/deleteentry?idItem='+_id,
+    'url': '/monitoring/deleteentry?idItem='+_id,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -562,7 +562,7 @@ function deleteEntrys(_id){
 ///////////////////////////
 function deleteEntrysPerm(_id){
   jQuery.ajax({
-    'url': '/entanglement/deleteentryperm?idItem='+_id,
+    'url': '/monitoring/deleteentryperm?idItem='+_id,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -589,7 +589,7 @@ function deployFormComponent(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModalentanglement(formToUse,'','component',items.elementID,headings,entry)
+  loadformModalmonitoring(formToUse,'','component',items.elementID,headings,entry)
 }
 
 //////////////////////////////////////////////
@@ -599,7 +599,7 @@ function deployFormUse(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModalentanglement(formToUse,'','use',templateload,headings,entry)
+  loadformModalmonitoring(formToUse,'','use',templateload,headings,entry)
 }
 
 //////////////////////////
@@ -610,7 +610,7 @@ function modifyItemComp(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModalentanglement(id,id,'self',id)
+    loadformModalmonitoring(id,id,'self',id)
   } else {
   //INSTRUCTIONS
   ////////////////////////////////////////////////////////////////////
@@ -643,7 +643,7 @@ function modifyItemComp(id){
     } 
     console.log('Tracing here',childType,id,'componentedit',parentIdTemp,headings, entry)
   //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformModalentanglement(childType,id,'componentedit',parentIdTemp,headings, entry)
+  loadformModalmonitoring(childType,id,'componentedit',parentIdTemp,headings, entry)
 }
 }
 
@@ -655,7 +655,7 @@ function copthisitem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModalentanglement(id,id,'self',id)
+    loadformModalmonitoring(id,id,'self',id)
   } else {
   //INSTRUCTIONS
   ////////////////////////////////////////////////////////////////////
@@ -687,7 +687,7 @@ function copthisitem(id){
       elementID : id
     } 
   //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformModalentanglement(childType,id,'componentcopy',parentIdTemp,headings, entry)
+  loadformModalmonitoring(childType,id,'componentcopy',parentIdTemp,headings, entry)
 }
 }
 
@@ -704,18 +704,18 @@ function deployparentrawForm(parentid){
 ////////////////////////////////////////////////
 function copyParentRaw(parentid){
   parentid = parentid.replace('_copy', '');
-  loadformModalentanglement(parentid,parentid,'copyraw',parentid)
+  loadformModalmonitoring(parentid,parentid,'copyraw',parentid)
 }
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformModalentanglement(formdata,idItem,raw,parentid,headings,entry){
-  console.log( 'Button click : plugins/entanglement/views/plugins/issuecomponent' )
+function loadformModalmonitoring(formdata,idItem,raw,parentid,headings,entry){
+  console.log( 'Button click : plugins/monitoring/views/plugins/issuecomponent' )
   var headings = JSON.stringify(headings)
   var entry = JSON.stringify(entry)
   jQuery.ajax({
-    'url': '/entanglement/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
+    'url': '/monitoring/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -729,7 +729,7 @@ function loadformModalentanglement(formdata,idItem,raw,parentid,headings,entry){
 ////////////////////////
 function useForm(id){
   id = id.replace('_use', '');
-  loadformModalentanglement(id,'','use',id)
+  loadformModalmonitoring(id,'','use',id)
 }
 
 //////////////////////////
@@ -740,9 +740,9 @@ function modifyItem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModalentanglement(id,id,'self',id)
+    loadformModalmonitoring(id,id,'self',id)
   } else {
-    loadformModalentanglement(childType,id,'self',id)
+    loadformModalmonitoring(childType,id,'self',id)
   }
 }
 
@@ -769,9 +769,9 @@ function createComp(id){
   //there is some kind of wierd lowcase requiremtns.
   parentid = $('#'+id+'').data('parentid')
   if (!childType) {
-    loadformModalentanglement(childType,'','use',id)
+    loadformModalmonitoring(childType,'','use',id)
   } else {
-    loadformModalentanglement(parentid,'','use',id)
+    loadformModalmonitoring(parentid,'','use',id)
   }
 }
 

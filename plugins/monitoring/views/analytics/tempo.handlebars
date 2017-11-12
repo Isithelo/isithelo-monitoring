@@ -1,26 +1,11 @@
- 
-
-
-
-<div class="panel panel-default">
+yy <div class="panel panel-default">
     <div id="containers" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 </div>
 <div id="selectedMarker"></div>
-<div class="row">
-
-
-   
-
-
-</div>
-
-<div id="selectedMarker"></div>
-
 
 <script type="text/javascript">
-    console.log( 'Template Loading : plugins/entanglement/views/analytics/stats' )
-    console.log( '--------------------------------------------------------------')
-
+console.log( 'Template Loading : plugins/monitoring/views/analytics/tempo' )
+console.log( '--------------------------------------------------------------')
     var data =[];
     var seriesChart = []
     var colours = [
@@ -35,7 +20,7 @@
 //////  INITIALISE    //////
 /////////////////////////// 
 $('document').ready(function(){
-   getdata()
+ getdata()
 })
 
 
@@ -43,25 +28,21 @@ $('document').ready(function(){
 //////  FORMAT FOR HIGHCHARTS    //////
 //////////////////////////////////////
 function getdata(){
-  var cylinderMax=[]
-  var BoomScale=[]
-  var ConveyorScale=[]    
-  var BoomScaleTotal=0
-  var ConveyorScaleTotal=0  
-  var AverageTPH = 0;
-  var AverageTPH1 = 0;
-  var count = 0;
-  var catagories=[]
-
-  for (var i = 0; i < calendarData.length; i++) {
-        //console.log(calendarData[i]['entry']["coloums"])
-        BoomScale.push((calendarData[i]['entry']["coloums"]["E641_CV01_WIT01A-STA_Analog"]["Sum"]/3600) )
-        ConveyorScale.push((calendarData[i]['entry']["coloums"]["E790_WE01_WIT01a-STA_Analog"]["Sum"]/3600)  )
-        AverageTPH = AverageTPH + ((calendarData[i]['entry']["coloums"]["E641_CV01_WIT01A-STA_Analog"]["Average"]) )
-        AverageTPH1 = AverageTPH1 + ((calendarData[i]['entry']["coloums"]["E790_WE01_WIT01a-STA_Analog"]["Average"]) )
-        count = count + 1 ;
-        BoomScaleTotal  = BoomScaleTotal + ((calendarData[i]['entry']["coloums"]["E641_CV01_WIT01A-STA_Analog"]["Sum"]/3600)  )
-        ConveyorScaleTotal = ConveyorScaleTotal + ((calendarData[i]['entry']["coloums"]["E790_WE01_WIT01a-STA_Analog"]["Sum"]/3600)  )
+    var BoomScale=[]
+    var ConveyorScale=[]    
+    var catagories=[]
+    for (var i = 0; i < calendarData.length; i++) {
+            //console.log(calendarData[i]['entry']["coloums"])
+            if ( isNaN(parseFloat(calendarData[i]['entry']["averageTPHboom"])) ){
+                BoomScale.push(0) 
+            } else {
+               BoomScale.push(parseFloat(calendarData[i]['entry']["averageTPHboom"]) )
+           };
+           if ( isNaN(parseFloat(calendarData[i]['entry']["averageTPHscale"]))) {
+            ConveyorScale.push(0)
+        } else {
+            ConveyorScale.push(parseFloat(calendarData[i]['entry']["averageTPHscale"] ))
+        };    
         catagories.push(calendarData[i]["date"])
     };
     seriesChart.push(
@@ -69,24 +50,22 @@ function getdata(){
         data: BoomScale,
         color: colours[0],
         name : "E641_CV01_WIT01A-STA_Analog - Boom conveyor 10 sec Avg belt weigher",
-
-        type : 'line',
         marker: {
             fillColor: 'white',
-            lineWidth: 1,
+            lineWidth: 2,
             lineColor: colours[0]
         },
     },{
         data: ConveyorScale,
         color: colours[1],
         name : "E790_WE01_WIT01a-STA_Analog - LOS Feed Conveyor Weightometer",
-        id: 'primary',
+        id :'primary',
         marker: {
             fillColor: 'white',
-            lineWidth: 1,
+            lineWidth: 2,
             lineColor: colours[1]
         },
-    } , {
+    }, {
         name: '10-day SMA',
         linkedTo: 'primary',
         showInLegend: true,
@@ -97,28 +76,28 @@ function getdata(){
         color: 'red'
     }
     )
-
     
-
- //array.sortBy(function(o){ return o.date });
-
- 
- highchartsStats(seriesChart,catagories)
+    
+//array.sortBy(function(o){ return o.date });
+highchartsStats(seriesChart,catagories)
 }
 
 
-
+////////////////////////////////////// 
+//////  ACTIVATE HIGHCHARTS    //////
+////////////////////////////////////
 function highchartsStats(seriesChart,catagories) {
- jQuery('#containers').highcharts({
+   jQuery('#containers').highcharts({
     title: {
-        text: 'Daily Tonnage Moved by Bucket Wheel Reclaimer',
+        text: 'Daily Average Tonnage Moved by Bucket Wheel Reclaimer',
             x: -20 //center
         },
         xAxis: {
             categories: catagories, 
         },
         chart: {
-            zoomType: 'x'
+            zoomType: 'x',
+            type: 'column'
         },
         plotOptions: {
             series: {
@@ -132,7 +111,6 @@ function highchartsStats(seriesChart,catagories) {
                             html+='Date: ' + this.category + ', value: ' + this.y
                             html+='</div></div>'
                             jQuery("#selectedMarker").html(html)
-
                         }
                     }
                 }
@@ -143,7 +121,6 @@ function highchartsStats(seriesChart,catagories) {
             title: {
                 text: 'Tonnes Moved (Tonnes)'
             },
-
         },
         tooltip: {
             valueSuffix: ' Tonne'
@@ -158,11 +135,4 @@ function highchartsStats(seriesChart,catagories) {
 
     });
 }
-
-
-
-
-
-
-
 </script>

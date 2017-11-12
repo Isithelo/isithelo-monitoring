@@ -1,4 +1,4 @@
-var scadaModel      = require('../../../plugins/entanglement/models/scada.js');
+var scadaModel      = require('../../../plugins/monitoring/models/scada.js');
 var ObjectId = require('mongodb').ObjectID;
 
 ///////////////////////////////////////////////
@@ -18,7 +18,7 @@ function debugging(req,query){
   if (query) {
     console.log()
     console.log('----------  DEBUGGING  ----------')
-    console.log('File Name : plugins/entanglement/controller/create')
+    console.log('File Name : plugins/monitoring/controller/create')
     console.log('Directory Name : '+__dirname)
     console.log('Original req URL : '+req.originalUrl)
     console.log('----------  DEBUGGING  ----------')

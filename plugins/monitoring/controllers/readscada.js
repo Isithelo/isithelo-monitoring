@@ -1,8 +1,8 @@
 var formsModel      = require('../../../plugins/semini/models/forms.js');
-var entanglementModel      = require('../../../plugins/entanglement/models/entanglement.js');
-var scadaModel      = require('../../../plugins/entanglement/models/scada.js');
+var monitoringModel      = require('../../../plugins/monitoring/models/monitoring.js');
+var scadaModel      = require('../../../plugins/monitoring/models/scada.js');
 var ObjectId = require('mongodb').ObjectID;
-var directory = '../../../plugins/entanglement/views/'
+var directory = '../../../plugins/monitoring/views/'
 
 ///////////////////////////////////////////////
 ////     SET YOUR APP.JSON DETAILS        //// 

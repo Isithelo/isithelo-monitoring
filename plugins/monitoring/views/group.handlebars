@@ -50,7 +50,7 @@ var tablelistdata = {{{query3}}};
 //Unique if for the forms.
 var formids = create_uid()
 
-var templateloadentanglement = {{{templateloadentanglement}}}
+var templateloadmonitoring = {{{templateloadmonitoring}}}
 
 
 /////////////////////////////////////
@@ -77,7 +77,7 @@ query2.sort(function(a, b) {
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'Template Loading : plugins/Entanglement/views/group' )
+console.log( 'Template Loading : plugins/monitoring/views/group' )
 console.log( '-------------------------' )
 console.log( 'items : ',items )
 console.log( 'query1 : ',query1 )
@@ -87,7 +87,7 @@ console.log( 'query4 : ',query4 )
 console.log( 'tablelistdata : ',tablelistdata )
 console.log( 'formids : ',formids )
 console.log( '-------------------------' )
-console.log( 'Template Loading : plugins/Entanglement/views/group' )
+console.log( 'Template Loading : plugins/monitoring/views/group' )
 
 
 if(items.elementID) {
@@ -130,7 +130,7 @@ $(document).ready(function() {
     jQuery.ajax({
       'async': true,
       'global': false,
-      'url': '/entanglement/groups?data='+ids,
+      'url': '/monitoring/groups?data='+ids,
       'success': function (dataSchemaObject) {
         input = JSON.parse(dataSchemaObject);
         groupShow(input)
@@ -194,11 +194,11 @@ function viewCatagory(id){
 function layoutView() {
   if (items.entry.layout) {
    for (var i = 0; i < items.entry.layout.length; i++) {
-    templateLoadentanglement(items.entry.layout[i],'toolbar')
+    templateLoadmonitoring(items.entry.layout[i],'toolbar')
   }
 }  else {
-  templateLoadentanglement(['parentraw'],'toolbar')
-  templateLoadentanglement(['add'],'toolbar')
+  templateLoadmonitoring(['parentraw'],'toolbar')
+  templateLoadmonitoring(['add'],'toolbar')
 }
 }
 
@@ -228,13 +228,13 @@ function deployForm(parentid){
   var entry = {
     parent : parentIdTemp,
   }
-  loadformModalentanglement(parentid,'','use',items.parentid,headings,entry)
+  loadformModalmonitoring(parentid,'','use',items.parentid,headings,entry)
 }
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformModalentanglement(formdata,idItem,raw,parentid,headings,entry){
+function loadformModalmonitoring(formdata,idItem,raw,parentid,headings,entry){
   var headings = JSON.stringify(headings)
   var entry = JSON.stringify(entry)
   jQuery.ajax({
@@ -251,13 +251,13 @@ function loadformModalentanglement(formdata,idItem,raw,parentid,headings,entry){
 ////////    BUTTON CLICK OPEN RAW FORM  /////////
 ////////////////////////////////////////////////
 function deployparentrawForm(parentid){
-  loadformModalentanglement(parentid,parentid,'raw',parentid)
+  loadformModalmonitoring(parentid,parentid,'raw',parentid)
 }
 
 ///////////////////////////////////
 ////////  LOADING OF TOOLS ///////
 /////////////////////////////////
-function templateLoadentanglement(template,location){
+function templateLoadmonitoring(template,location){
 //Ensure that the first load error is covered , also any other errors.
 if(template){
   jQuery.ajax({
@@ -279,7 +279,7 @@ function deployFormComponent(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModalentanglement(formToUse,'','component',items.elementID,headings,entry)
+  loadformModalmonitoring(formToUse,'','component',items.elementID,headings,entry)
 }
 
 //////////////////////////////////////////////
@@ -289,7 +289,7 @@ function deployFormUse(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModalentanglement(formToUse,'','use',templateloadentanglement,headings,entry)
+  loadformModalmonitoring(formToUse,'','use',templateloadmonitoring,headings,entry)
 }
 
 //////////////////////////////////////////////
@@ -318,7 +318,7 @@ function modifybutton(parentid){
   var entry = {
     parent : parentIdTemp,
   }
-  loadformModalentanglement(parentid,parentIdTemp,'self',items.parentid,headings,entry)
+  loadformModalmonitoring(parentid,parentIdTemp,'self',items.parentid,headings,entry)
 }
 
 //////////////////////////////////////////////////
@@ -326,7 +326,7 @@ function modifybutton(parentid){
 ////////////////////////////////////////////////
 function deployparentrawForm(parentid){
  parentid = parentid.replace('_parentraw', '');
- loadformModalentanglement(parentid,parentid,'raw',parentid)
+ loadformModalmonitoring(parentid,parentid,'raw',parentid)
 }
 
 //////////////////////////////////////////////////
@@ -334,14 +334,14 @@ function deployparentrawForm(parentid){
 ////////////////////////////////////////////////
 function copyParentRaw(parentid){
   parentid = parentid.replace('_copy', '');
-  loadformModalentanglement(parentid,parentid,'copyraw',parentid)
+  loadformModalmonitoring(parentid,parentid,'copyraw',parentid)
 }
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformModalentanglement(formdata,idItem,raw,parentid,headings){
-  console.log('Triggering plugins/Entanglement/views/group loadformModalentanglement()')
+function loadformModalmonitoring(formdata,idItem,raw,parentid,headings){
+  console.log('Triggering plugins/monitoring/views/group loadformModalmonitoring()')
   var headings = JSON.stringify(headings)
   jQuery.ajax({
     'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
@@ -358,7 +358,7 @@ function loadformModalentanglement(formdata,idItem,raw,parentid,headings){
 ////////////////////////
 function useForm(id){
   id = id.replace('_use', '');
-  loadformModalentanglement(id,'','use',id)
+  loadformModalmonitoring(id,'','use',id)
 }
 
 //////////////////////////
@@ -370,9 +370,9 @@ function modifyItem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModalentanglement(id,id,'self',id,headings)
+    loadformModalmonitoring(id,id,'self',id,headings)
   } else {
-    loadformModalentanglement(childType,id,'self',id,headings)
+    loadformModalmonitoring(childType,id,'self',id,headings)
   }
 }
 
@@ -384,9 +384,9 @@ function tableraw(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModalentanglement(id,id,'raw',id)
+    loadformModalmonitoring(id,id,'raw',id)
   } else {
-    loadformModalentanglement(childType,id,'raw',id)
+    loadformModalmonitoring(childType,id,'raw',id)
   }
 }
 
@@ -399,9 +399,9 @@ function createComp(id){
   //there is some kind of wierd lowcase requiremtns.
   parentid = $('#'+id+'').data('parentid')
   if (!childType) {
-    loadformModalentanglement(childType,'','use',id)
+    loadformModalmonitoring(childType,'','use',id)
   } else {
-    loadformModalentanglement(parentid,'','use',id)
+    loadformModalmonitoring(parentid,'','use',id)
   }
 }
 

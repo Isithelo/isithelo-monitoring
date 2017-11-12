@@ -67,7 +67,7 @@ query2.sort(function(a, b) {
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'Tempalte Name : plugins/entanglement/views/datahelp' )
+console.log( 'Template Loading : plugins/monitoring/views/formtable' )
 console.log( '-------------------------' )
 console.log( 'items : ',items )
 console.log( 'query1 : ',query1 )
@@ -78,7 +78,7 @@ console.log( 'tablelistdata : ',tablelistdata )
 console.log( 'formids : ',formids )
 console.log( 'templateload : ',templateload )
 console.log( '-------------------------' )
-console.log( 'Tempalte Name : plugins/entanglement/views/datahelp' )
+console.log( 'Template Loading : plugins/monitoring/views/formtable' )
 
 
 if(items.elementID) {
@@ -93,11 +93,11 @@ if(items.elementID) {
 function layoutView() {
   if (items.entry.layout) {
    for (var i = 0; i < items.entry.layout.length; i++) {
-    templateLoad(items.entry.layout[i],'toolbar')
+    templateLoadmonitoring(items.entry.layout[i],'toolbar')
   }
 }  else {
-  templateLoad(['parentraw'],'toolbar')
-  templateLoad(['add'],'toolbar')
+  templateLoadmonitoring(['parentraw'],'toolbar')
+  templateLoadmonitoring(['add'],'toolbar')
 }
 }
 
@@ -107,10 +107,10 @@ function layoutView() {
 function tabview() {
   if (items.entry.tabs) {
    for (var i = 0; i < items.entry.tabs.length; i++) {
-    templateLoad(items.entry.tabs[i],'tab')
+    templateLoadmonitoring(items.entry.tabs[i],'tab')
   }
 }  else {
-  templateLoad(['table'],'tab')
+  templateLoadmonitoring(['table'],'tab')
 }
 }
 
@@ -123,10 +123,9 @@ function tablist(){
    for (var i = 0; i < items.entry.tabs.length; i++) {
 //used for 0 length items
 if (i==0) {
-
 switch(true){
-  case (items.entry.tabs=='tablecomponent'):
-   html +='<li role="presentation" class="active"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Components</a></li>'
+  case (items.entry.tabs=='issuecomponent'):
+   html +='<li role="presentation" class="active"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Issues</a></li>'
   break;
     case (items.entry.tabs=='producttable'):
    html +='<li role="presentation" class="active"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Products</a></li>'
@@ -135,12 +134,9 @@ switch(true){
     html +='<li role="presentation" class="active"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">'+capitalize(items.entry.tabs[i])+'</a></li>'
   break;
 }
-
-
- 
 } else {
-  if (items.entry.tabs=='tablecomponent') {
-    html +='<li role="presentation"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Components</a></li>'
+  if (items.entry.tabs=='issuecomponent') {
+    html +='<li role="presentation"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Issues</a></li>'
   } else {
    html +='<li role="presentation"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">'+capitalize(items.entry.tabs[i])+'</a></li>'
  }
@@ -162,13 +158,13 @@ function capitalize(str) {
 ///////////////////////////////////
 ////////  LOADING OF TOOLS ///////
 /////////////////////////////////
-function templateLoad(template,location){
+function templateLoadmonitoring(template,location){
 //Ensure that the first load error is covered , also any other errors.
 if(template){
   jQuery.ajax({
    'async': true,
    'global': false,
-   'url': '/entanglement/templatename?template='+template,
+   'url': '/monitoring/templatename?template='+template,
    'success': function (dataSchemaObject) {
      jQuery('#'+location).append(dataSchemaObject)
    }

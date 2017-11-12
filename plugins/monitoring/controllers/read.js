@@ -1,7 +1,7 @@
 var formsModel      = require('../../../plugins/semini/models/forms.js');
-var entanglementModel      = require('../../../plugins/entanglement/models/entanglement.js');
+var monitoringModel      = require('../../../plugins/monitoring/models/monitoring.js');
 var ObjectId = require('mongodb').ObjectID;
-var directory = '../../../plugins/entanglement/views/'
+var directory = '../../../plugins/monitoring/views/'
 
 ///////////////////////////////////////////////
 ////     SET YOUR APP.JSON DETAILS        //// 
@@ -365,7 +365,7 @@ var query2 = formsModel.find(
 ///////////////////////////////////////
 //  4.ENTRIES CREATED BY THIS FORM  //
 /////////////////////////////////////
-var query3 = entanglementModel.find(
+var query3 = monitoringModel.find(
 {
   $and : 
   [
@@ -702,7 +702,7 @@ var query1 = formsModel.find(
 } else {
 
   //Find the data to be viewed on the form.
-var query1 = entanglementModel.find(
+var query1 = monitoringModel.find(
 {
   $and : 
   [

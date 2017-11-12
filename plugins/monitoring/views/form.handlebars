@@ -68,7 +68,7 @@
 ////////////////////////////////////
 ////        DEBUG AREA         //// 
 //////////////////////////////////
-console.log( 'Tempalte Name : plugins/entanglement/views/form' )
+console.log( 'Tempalte Name : plugins/monitoring/views/form' )
 console.log( '-------------------------' )
 console.log( 'formdata :',formdata )
 console.log( 'idItem :',idItem )
@@ -84,7 +84,7 @@ console.log( 'entry :',entry )
 var entry
 {{/if}}
 console.log( '-------------------------' )
-console.log( 'Tempalte Name : plugins/entanglement/views/form' )
+console.log( 'Tempalte Name : plugins/monitoring/views/form' )
 ////////////////////////////////////
 ////        DEBUG AREA         //// 
 //////////////////////////////////
@@ -124,7 +124,7 @@ $(document).ready(function(){
 ///////////////////////////////////////////////////////
 function getdatacomp(formdata,idItem,raw){
   jQuery.ajax({
-    'url': '/entanglement/getdatacomp?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
+    'url': '/monitoring/getdatacomp?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -141,7 +141,7 @@ function getdatacomp(formdata,idItem,raw){
 ///////////////////////////////////////
 function getdata(formdata,idItem,raw){
   jQuery.ajax({
-    'url': '/entanglement/getdata?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
+    'url': '/monitoring/getdata?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -515,7 +515,7 @@ if (!temp == undefined) {
     jQuery.ajax({
       'async': true,
       'global': false,
-      'url': '/entanglement/getformfield?data='+temp ,
+      'url': '/monitoring/getformfield?data='+temp ,
       'success': function (dataSchemaObject) {
         if (dataSchemaObject) {
           var dataSchemaObject = JSON.parse(dataSchemaObject);
@@ -823,7 +823,7 @@ switch(true){
 
 //Jquery send to server
 jQuery.ajax({
-  'url': '/entanglement/createform',
+  'url': '/monitoring/createform',
   'type': 'POST', 
   'dataType': 'json',
   'contentType': 'application/json', 

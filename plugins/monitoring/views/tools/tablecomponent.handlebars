@@ -495,7 +495,7 @@ function permdelete(id){
 ///////////////////////////
 function deleteEntrys(_id){
   jQuery.ajax({
-    'url': '/entanglement/deleteentry?idItem='+_id,
+    'url': '/monitoring/deleteentry?idItem='+_id,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -509,7 +509,7 @@ function deleteEntrys(_id){
 ///////////////////////////
 function deleteEntrysPerm(_id){
   jQuery.ajax({
-    'url': '/entanglement/deleteentryperm?idItem='+_id,
+    'url': '/monitoring/deleteentryperm?idItem='+_id,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -536,7 +536,7 @@ function deployFormComponent(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformEntanglement(formToUse,'','component',items.elementID,headings,entry)
+  loadformmonitoring(formToUse,'','component',items.elementID,headings,entry)
 }
 
 //////////////////////////////////////////////
@@ -546,7 +546,7 @@ function deployFormUse(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformEntanglement(formToUse,'','use',templateload,headings,entry)
+  loadformmonitoring(formToUse,'','use',templateload,headings,entry)
 }
 
 //////////////////////////
@@ -557,7 +557,7 @@ function modifyItemComp(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformEntanglement(id,id,'self',id)
+    loadformmonitoring(id,id,'self',id)
   } else {
   //INSTRUCTIONS
   ////////////////////////////////////////////////////////////////////
@@ -590,7 +590,7 @@ function modifyItemComp(id){
     } 
     console.log('Tracing here',childType,id,'componentedit',parentIdTemp,headings, entry)
   //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformEntanglement(childType,id,'componentedit',parentIdTemp,headings, entry)
+  loadformmonitoring(childType,id,'componentedit',parentIdTemp,headings, entry)
 }
 }
 
@@ -602,7 +602,7 @@ function copthisitem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformEntanglement(id,id,'self',id)
+    loadformmonitoring(id,id,'self',id)
   } else {
   //INSTRUCTIONS
   ////////////////////////////////////////////////////////////////////
@@ -634,7 +634,7 @@ function copthisitem(id){
       elementID : id
     } 
   //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformEntanglement(childType,id,'componentcopy',parentIdTemp,headings, entry)
+  loadformmonitoring(childType,id,'componentcopy',parentIdTemp,headings, entry)
 }
 }
 
@@ -651,17 +651,17 @@ function deployparentrawForm(parentid){
 ////////////////////////////////////////////////
 function copyParentRaw(parentid){
   parentid = parentid.replace('_copy', '');
-  loadformEntanglement(parentid,parentid,'copyraw',parentid)
+  loadformmonitoring(parentid,parentid,'copyraw',parentid)
 }
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformEntanglement(formdata,idItem,raw,parentid,headings,entry){
+function loadformmonitoring(formdata,idItem,raw,parentid,headings,entry){
   var headings = JSON.stringify(headings)
   var entry = JSON.stringify(entry)
   jQuery.ajax({
-    'url': '/entanglement/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
+    'url': '/monitoring/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -675,7 +675,7 @@ function loadformEntanglement(formdata,idItem,raw,parentid,headings,entry){
 ////////////////////////
 function useForm(id){
   id = id.replace('_use', '');
-  loadformEntanglement(id,'','use',id)
+  loadformmonitoring(id,'','use',id)
 }
 
 //////////////////////////
@@ -686,9 +686,9 @@ function modifyItem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformEntanglement(id,id,'self',id)
+    loadformmonitoring(id,id,'self',id)
   } else {
-    loadformEntanglement(childType,id,'self',id)
+    loadformmonitoring(childType,id,'self',id)
   }
 }
 
@@ -715,9 +715,9 @@ function createComp(id){
   //there is some kind of wierd lowcase requiremtns.
   parentid = $('#'+id+'').data('parentid')
   if (!childType) {
-    loadformEntanglement(childType,'','use',id)
+    loadformmonitoring(childType,'','use',id)
   } else {
-    loadformEntanglement(parentid,'','use',id)
+    loadformmonitoring(parentid,'','use',id)
   }
 }
 
