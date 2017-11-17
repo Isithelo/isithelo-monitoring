@@ -1,3 +1,3 @@
-# Isithelo Monititoring
+# Isithelo Monitoring
 
 Open Source SCADA System.
