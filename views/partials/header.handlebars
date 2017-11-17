@@ -119,3 +119,20 @@ progressBar.animate(1.0, {
     $('#headerload').html('')
 });
 </script>
+
+{{#if user}}
+
+
+
+<script type="text/javascript">
+ var user = JSON.parse(JSON.stringify('{{user.permission}}'))
+///////////////////////////// 
+//////  INITIALISE    //////
+/////////////////////////// 
+$( document ).ready(function() {
+  if (user=='superadmin') {
+    $("#usermenu").append('<li class="divider"></li> <li><a href="/configuration"><i class="fa fa-cog" aria-hidden="true"></i> Configuration</a></li><li><a href="heavylifting/forms"><i class="fa fa-cog" aria-hidden="true"></i> Forms</a></li>')
+  }
+});
+</script>
+{{/if}}
